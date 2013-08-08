@@ -1,8 +1,6 @@
 from sim import Player, run_many_games
 from random import randint
 
-games = 10000
-
 class RandomPlayer(Player):
     def game(self):
         for turn in range(1, self.turn_limit + 1):
@@ -13,4 +11,4 @@ class RandomPlayer(Player):
         return (False, self.turn_limit)
 
 if __name__ == "__main__":
-    run_many_games(RandomPlayer, 10000, "random_player.csv")
+    run_many_games(RandomPlayer, 100000, "random_player.csv")
