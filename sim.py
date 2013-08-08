@@ -27,7 +27,7 @@ def run_many_games(class_name, trials, output_file,
     output = open(output_file, 'w')
     output.write('game_number,turns,succeeded?\n')
     for i in range(1, trials + 1):
-        print "[%s] game number: i" % class_name
+        print "[%s] game number: %d" % (class_name, i)
         result = class_name(turn_limit=turn_limit,
                 positions=positions, colors=colors).game()
         

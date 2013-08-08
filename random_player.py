@@ -13,4 +13,4 @@ class RandomPlayer(Player):
         return (False, self.turn_limit)
 
 if __name__ == "__main__":
-    run_many_games(RandomPlayer, 1, "random_player.csv")
+    run_many_games(RandomPlayer, 10000, "random_player.csv")
