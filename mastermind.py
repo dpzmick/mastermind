@@ -17,10 +17,7 @@ class Mastermind:
             self.code[color] = [p for p, c in enumerate(code) if c == color]
 
     def random_code(self):
-        code = []
-        for i in range(0, self.positions):
-            code.append(randint(1,self.colors))
-        return code
+        return [randint(1, self.colors) for i in range(0, self.positions) ]
     
     def check_guess(self, guess):
         code_copy = deepcopy(self.code)
