@@ -31,6 +31,7 @@ def run_many_games(class_name, trials, turn_limit=16, positions=4, colors=6,
     if not redis_key == None:
         import redis
         r = redis.StrictRedis(host='192.168.1.201', port=6379, db=0)
+        results = []
     else:
         raise Exception("No output specified!")
 
@@ -41,9 +42,13 @@ def run_many_games(class_name, trials, turn_limit=16, positions=4, colors=6,
         if not output_file == None:
             output.write("%d,%d,%s\n" % (i, result[1], result[0]))
         if not redis_key == None:
-            r.rpush(redis_key, result[1])
+            results.append(results[1])
+            #r.rpush(redis_key, result[1])
     
     if not output_file == None:
         output.close()
+    if not redis_key == None:
+        for res in results:
+            r.rpush(redis_key, res)
 
     return 0
