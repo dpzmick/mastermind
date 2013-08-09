@@ -8,7 +8,7 @@ jobs = []
 
 games_per_task = 2000
 
-games = 1000000
+games = 100000
 tasks = games / games_per_task
 
 print "Making %d tasks, %d games each, to run %d games" % (tasks,games_per_task,games)
