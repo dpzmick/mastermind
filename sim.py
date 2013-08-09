@@ -21,19 +21,30 @@ class Player:
     def game(self):
         return (False, -1)
 
-def run_many_games(class_name, trials, output_file,
-        turn_limit=16, positions=4, colors=6):
+def run_many_games(class_name, trials, turn_limit=16, positions=4, colors=6,
+        output_file=None, redis_key=None):
 
     #return 1
-    output = open(output_file, 'w')
-    output.write('game_number,turns,succeeded?\n')
+    if not output_file == None:
+        output = open(output_file, 'w')
+        output.write('game_number,turns,succeeded?\n')
+    if not redis_key == None:
+        import redis
+        r = redis.StrictRedis(host='10.0.0.1', port=6379, db=0)
+        r.delete(redis_key)
+    else:
+        raise Exception("No output specified!")
+
     for i in range(1, trials + 1):
-        #print "[%s] game number: %d" % (class_name, i)
         result = class_name(turn_limit=turn_limit,
                 positions=positions, colors=colors).game()
         
-        #print "[%s] result: %d" % (class_name, result[1])
-        output.write("%d,%d,%s\n" % (i, result[1], result[0]))
+        if not output_file == None:
+            output.write("%d,%d,%s\n" % (i, result[1], result[0]))
+        if not redis_key == None:
+            r.rpush(redis_key, result[1])
     
-    output.close()
+    if not output_file == None:
+        output.close()
+
     return 0
