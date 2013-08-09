@@ -31,7 +31,6 @@ def run_many_games(class_name, trials, turn_limit=16, positions=4, colors=6,
     if not redis_key == None:
         import redis
         r = redis.StrictRedis(host='10.0.0.1', port=6379, db=0)
-        r.delete(redis_key)
     else:
         raise Exception("No output specified!")
 
